@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react'
+import Header from '../components/Header'
 
 class CatAdd extends Component{
   constructor(props){
@@ -50,85 +51,84 @@ class CatAdd extends Component{
   render(){
 
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src="http://pngimg.com/uploads/cat/cat_PNG1631.png" className="App-logo" alt="logo" />
-          <h2>Add a cat!</h2>
+      <div >
+        <div className="header">
+          <Header textLocation="Home" linkLocation="/" text="Add a cat"/>
         </div>
+        <div id="imageBox">
+          <img src="http://pngimg.com/uploads/cat/cat_PNG1631.png" className="App-logo" alt="logo" />
+        </div>
+        <div className="row">
+          <div className="col-xs-2 col-xs-offset-5">
 
-        <div className="container">
-          <div className="row">
-            <div className="col-xs-2 col-xs-offset-5">
+            <form onSubmit={this.handleSubmit.bind(this)}>
+              <label htmlFor="color">Color</label>
+              <input
+                onChange={this.handleChange.bind(this)}
+                value={this.state.cat.color}
+                name="color"
+                type="text"
+                placeholder='Black'
+              />
 
-              <form onSubmit={this.handleSubmit.bind(this)}>
-                <label htmlFor="color">Color</label>
-                <input
-                  onChange={this.handleChange.bind(this)}
-                  value={this.state.cat.color}
-                  name="color"
-                  type="text"
-                  placeholder='Black'
-                />
+              <label name="breed">Breed</label>
+              <input
+                type="text"
+                name="breed"
+                onChange={this.handleChange.bind(this)}
+                value={this.state.cat.breed}
+                placeholder='Tabby'
+              />
 
-                <label name="breed">Breed</label>
-                <input
-                  type="text"
-                  name="breed"
-                  onChange={this.handleChange.bind(this)}
-                  value={this.state.cat.breed}
-                  placeholder='Tabby'
-                />
+              <label htmlFor="gender">Gender</label>
+              <select
+                value={this.state.cat.gender}
+                onChange={this.handleChange.bind(this)}
+                name="gender"
+                >
+                <option value="Male" >Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
 
-                <label htmlFor="gender">Gender</label>
-                <select
-                  value={this.state.cat.gender}
-                  onChange={this.handleChange.bind(this)}
-                  name="gender"
-                  >
-                  <option value="Male" >Male</option>
-                  <option value="Female">Female</option>
-                  <option value="Other">Other</option>
-                </select>
+              <label htmlFor="habitat">Habitat</label>
+              <select
+                name="habitat"
+                value={this.state.cat.habitat}
+                onChange={this.handleChange.bind(this)}
+                >
+                <option value="Indoor" >Indoor</option>
+                <option value="Outdoor" >Outdoor</option>
+                <option value="Feral" >Feral</option>
+              </select>
 
-                <label htmlFor="habitat">Habitat</label>
-                <select
-                  name="habitat"
-                  value={this.state.cat.habitat}
-                  onChange={this.handleChange.bind(this)}
-                  >
-                  <option value="Indoor" >Indoor</option>
-                  <option value="Outdoor" >Outdoor</option>
-                  <option value="Feral" >Feral</option>
-                </select>
+              <label htmlFor="personality">Personality</label>
+              <input
+                type="text"
+                name="personality"
+                placeholder='Happy'
+                value={this.state.cat.personality}
+                onChange={this.handleChange.bind(this)}
+              />
 
-                <label htmlFor="personality">Personality</label>
-                <input
-                  type="text"
-                  name="personality"
-                  placeholder='Happy'
-                  value={this.state.cat.personality}
-                  onChange={this.handleChange.bind(this)}
-                />
-
-                <label htmlFor="age">Age</label>
-                <input
-                  type="number"
-                  name="age"
-                  placeholder="0"
-                  min="0"
-                  onChange={this.handleChange.bind(this)}
-                  value={this.state.cat.age}
-                />
-                <br />
-                <br />
-                <input className="btn btn-default" type="submit" value="Submit" />
-              </form>
-
-            </div>
+              <label htmlFor="age">Age</label>
+              <input
+                type="number"
+                name="age"
+                placeholder="0"
+                min="0"
+                onChange={this.handleChange.bind(this)}
+                value={this.state.cat.age}
+              />
+              <br />
+              <br />
+              <input className="btn btn-default" type="submit" value="Submit" />
+            </form>
 
           </div>
 
         </div>
+
       </div>
     )
   }

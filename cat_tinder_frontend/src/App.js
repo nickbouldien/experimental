@@ -11,6 +11,7 @@ class App extends Component {
         <div className="container">
           <Route exact path="/" component={CatIndex} />
           <Route path='/cat-add' component={CatAdd} />
+          <Route path='/cat-profile' component={CatAdd} />
         </div>
       </Router>
     );

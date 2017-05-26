@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import Header from '../components/Header'
+import CatListing from '../components/CatListing'
 
 class CatIndex extends Component{
   constructor(props){
@@ -35,17 +36,10 @@ class CatIndex extends Component{
   }
 
   renderCats(){
-    let list = this.state.cats.map(function(cat) {
+    let list = this.state.cats.map(function(cat, i) {
       console.log(cat);
       return (
-        // <div key={'z' + cat.id}>
-            <ul key={cat.id}>
-              <li key={'a'+cat.id}>{cat.color}</li>
-              <li key={'b'+cat.id}>{cat.habitat}</li>
-              <li key={'c'+cat.id}>{cat.gender}</li>
-              <li key={'d'+cat.id}>{cat.age}</li>
-            </ul>
-          // </div>
+        <CatListing catInfo={cat}/>
         )
     })
     return list;
@@ -54,7 +48,9 @@ class CatIndex extends Component{
   render(){
     return (
       <div>
-        <Header textLocation="Cats!" linkLocation="/cat-add" text="Add a Cat"/>
+        <div className="header">
+          <Header textLocation="Add a cat!" linkLocation="/cat-add" text="Cats!"/>
+        </div>
         <div className="row">
           <div className="col-xs-12">
             {this.renderCats()}
