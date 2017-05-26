@@ -13,6 +13,10 @@
   margin-bottom: 10px;
 }
 
+label {
+  margin-right: 8px;
+}
+
 #imageBox {
   justify-content: center;
   margin: auto;
@@ -33,7 +37,7 @@ h1 {
 
 ul {
   border: 2px solid black;
-  width: 200px;
+  width: 225px;
   height: 100px;
   margin-left: 5px;
   margin-right: 5px;

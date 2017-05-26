@@ -1,4 +1,4 @@
-
+import {Link} from 'react-router-dom';
 import React, { Component } from 'react'
 
 class CatListing extends Component{
@@ -13,6 +13,7 @@ class CatListing extends Component{
           <li>{info.gender}</li>
           <li>{info.age}</li>
         </ul>
+        <Link to="/profile" stuff={{ info: info}}>Details</Link>
       </div>
     )
   }

@@ -20,7 +20,6 @@ class CatIndex extends Component{
     fetch('http://localhost:4000/cats', params)
       .then((response)=>{
         success = response.ok
-        //console.log(response);
         return response.json()
       })
       .then((body)=>{
@@ -37,9 +36,8 @@ class CatIndex extends Component{
 
   renderCats(){
     let list = this.state.cats.map(function(cat, i) {
-      console.log(cat);
       return (
-        <CatListing catInfo={cat}/>
+        <CatListing key={cat.id} catInfo={cat}/>
         )
     })
     return list;

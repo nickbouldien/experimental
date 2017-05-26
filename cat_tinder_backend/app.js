@@ -15,9 +15,7 @@ app.use(bodyParser.json())
 
 
 app.get('/cats', function (request, response) {
-  console.log('in the thing');
   Cat.findAll().then(function(cats){
-    //console.log(cats)
     response.status(200)
     response.json({message: "success", cats: cats})
 
@@ -29,7 +27,6 @@ app.get('/cats', function (request, response) {
 //create request.body.cat
 app.post('/create-cat', function(request, response){
   Cat.create(request.body.cat).then(function(cat){
-    console.log(request.body);
     response.status(200)
     response.json({message: "success", cat: cat})
   }).catch(function(error){
