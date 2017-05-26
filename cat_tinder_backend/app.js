@@ -12,13 +12,24 @@ app.use(cors())
 app.use(express.static('public'))
 app.use(bodyParser.json())
 
-app.get('/', function (request, response) {
-  response.json({message: 'API Example App'})
+
+
+app.get('/cats', function (request, response) {
+  console.log('in the thing');
+  Cat.findAll().then(function(cats){
+    //console.log(cats)
+    response.status(200)
+    response.json({message: "success", cats: cats})
+
+  })
+  // response.json({message: 'API Example App'})
 });
 
+
+//create request.body.cat
 app.post('/create-cat', function(request, response){
-  Cat.create(request.body).then(function(cat){
-    console.log('success');
+  Cat.create(request.body.cat).then(function(cat){
+    console.log(request.body);
     response.status(200)
     response.json({message: "success", cat: cat})
   }).catch(function(error){
