@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import {Link} from 'react-router-dom'
+import Header from '../components/Header'
 
 class CatIndex extends Component{
   constructor(props){
@@ -6,8 +8,7 @@ class CatIndex extends Component{
     this.state = {
       cats: []
     }
-
-    }
+  }
 
   componentWillMount(){
     let success
@@ -33,27 +34,34 @@ class CatIndex extends Component{
       })
   }
 
-  render(){
-    console.log(this.state.cats);
+  renderCats(){
     let list = this.state.cats.map(function(cat) {
       console.log(cat);
       return (
-        <div key={'z' + cat.id}>
-          <ul key={cat.id}>
-            <li key={'a'+cat.id}>{cat.color}</li>
-            <li key={'b'+cat.id}>{cat.habitat}</li>
-            <li key={'c'+cat.id}>{cat.gender}</li>
-            <li key={'d'+cat.id}>{cat.age}</li>
-          </ul>
-      </div>
-    )
+        // <div key={'z' + cat.id}>
+            <ul key={cat.id}>
+              <li key={'a'+cat.id}>{cat.color}</li>
+              <li key={'b'+cat.id}>{cat.habitat}</li>
+              <li key={'c'+cat.id}>{cat.gender}</li>
+              <li key={'d'+cat.id}>{cat.age}</li>
+            </ul>
+          // </div>
+        )
     })
-    console.log(list);
+    return list;
+  }
 
+  render(){
     return (
       <div>
-        {list}
+        <Header textLocation="Cats!" linkLocation="/cat-add" text="Add a Cat"/>
+        <div className="row">
+          <div className="col-xs-12">
+            {this.renderCats()}
+          </div>
+        </div>
       </div>
+
     )
   }
 }

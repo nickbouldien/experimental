@@ -14,8 +14,20 @@
   color: white;
 }
 
+h1 {
+  text-align: center;
+}
+
 .App-intro {
   font-size: large;
+}
+ul {
+  display: inline-block;
+  border: 2px solid black;
+  width: 200px;
+  height: 100px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 @keyframes App-logo-spin {

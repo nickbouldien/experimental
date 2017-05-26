@@ -67,6 +67,7 @@ class CatAdd extends Component{
                   value={this.state.cat.color}
                   name="color"
                   type="text"
+                  placeholder='Black'
                 />
 
                 <label name="breed">Breed</label>
@@ -104,6 +105,7 @@ class CatAdd extends Component{
                 <input
                   type="text"
                   name="personality"
+                  placeholder='Happy'
                   value={this.state.cat.personality}
                   onChange={this.handleChange.bind(this)}
                 />
@@ -112,6 +114,8 @@ class CatAdd extends Component{
                 <input
                   type="number"
                   name="age"
+                  placeholder="0"
+                  min="0"
                   onChange={this.handleChange.bind(this)}
                   value={this.state.cat.age}
                 />

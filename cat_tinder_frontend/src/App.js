@@ -8,7 +8,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div>
+        <div className="container">
           <Route exact path="/" component={CatIndex} />
           <Route path='/cat-add' component={CatAdd} />
         </div>
