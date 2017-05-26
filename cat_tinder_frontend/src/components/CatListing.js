@@ -11,12 +11,14 @@ class CatListing extends Component{
           <li>{info.color}</li>
           <li>{info.habitat}</li>
           <li>{info.gender}</li>
+          <li>{info.personality}</li>
+          <li>{info.breed}</li>
           <li>{info.age}</li>
         </ul>
-        <Link to="/profile" stuff={{ info: info}}>Details</Link>
+        <Link to="/profile" >Details</Link>
       </div>
     )
   }
 }
-
+// stuff={{ info: info}}
 export default CatListing

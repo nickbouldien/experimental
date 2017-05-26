@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom'
+// import {Link} from 'react-router-dom'
 import Header from '../components/Header'
-import CatListing from '../components/CatListing'
+import CatListing from '../components/CatListing';
+import {fetchCats} from '../actions/CatActions';
+import catStore from '../stores/CatStore';
 
 class CatIndex extends Component{
   constructor(props){
@@ -9,29 +11,17 @@ class CatIndex extends Component{
     this.state = {
       cats: []
     }
+    fetchCats()
+  }
+
+  handleChange(){
+    this.setState({
+      cats: catStore.getCats()
+    })
   }
 
   componentWillMount(){
-    let success
-    const params = {
-          method: 'GET',
-          headers: {'Content-Type': 'application/json'}
-        }
-    fetch('http://localhost:4000/cats', params)
-      .then((response)=>{
-        success = response.ok
-        return response.json()
-      })
-      .then((body)=>{
-        if (success){
-          console.log("success!", body)
-          let cats = body.cats
-          this.setState({cats: cats})
-        }
-        else {
-          console.log("failure!", body)
-        }
-      })
+    catStore.on('change', this.handleChange.bind(this))
   }
 
   renderCats(){
