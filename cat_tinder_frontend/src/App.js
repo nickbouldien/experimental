@@ -4,8 +4,14 @@ import CatAdd from './routes/CatAdd';
 import CatProfile from './routes/CatProfile';
 import CatIndex from './routes/CatIndex';
 import './App.css';
+import {fetchCats} from './actions/CatActions';
+
 
 class App extends Component {
+  constructor(props){
+    super(props)
+    fetchCats()
+  }
   render() {
     return (
       <Router>

@@ -1,6 +1,6 @@
 import dispatcher from '../dispatchers/dispatcher'
 
-export function fetchCats(){
+export function fetchCats(initial=false){
   let success;
   const params = {
         method: 'GET',
@@ -17,7 +17,8 @@ export function fetchCats(){
         let cats = body.cats
         dispatcher.dispatch({
           type: "FETCH_CATS",
-          cats: cats
+          cats: cats,
+          initial: initial
         })
       }
       else {

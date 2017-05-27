@@ -12,9 +12,14 @@ class CatStore extends EventEmitter{
     return this.cats;
   }
 
-  updateCats(cats){
+  updateCats(cats, initial){
     this.cats = cats
-    this.emit('change')
+    if(initial){
+      this.emit('load')
+    } else {
+      this.emit('change')
+    }
+
   }
 
   addCat(cat){
@@ -28,7 +33,7 @@ class CatStore extends EventEmitter{
     console.log(action.cats);
     switch(action.type){
       case("FETCH_CATS"):{
-        this.updateCats(action.cats)
+        this.updateCats(action.cats, action.initial)
         break
       }
       case("NEW_CAT"):{
@@ -41,5 +46,6 @@ class CatStore extends EventEmitter{
 }
 
 const catStore = new CatStore();
+window.store = catStore;
 dispatcher.register(catStore.handleAction.bind(catStore))
 export default catStore;

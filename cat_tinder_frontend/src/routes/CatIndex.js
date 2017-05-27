@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 // import {Link} from 'react-router-dom'
 import Header from '../components/Header'
 import CatListing from '../components/CatListing';
-import {fetchCats} from '../actions/CatActions';
 import catStore from '../stores/CatStore';
 
 class CatIndex extends Component{
@@ -11,7 +10,13 @@ class CatIndex extends Component{
     this.state = {
       cats: []
     }
-    fetchCats()
+  }
+
+  componentWillMount(){
+    catStore.on('load', this.handleChange.bind(this))
+    this.setState({
+      cats: catStore.getCats()
+    })
   }
 
   handleChange(){
@@ -20,8 +25,11 @@ class CatIndex extends Component{
     })
   }
 
-  componentWillMount(){
-    catStore.on('change', this.handleChange.bind(this))
+  componentWillUpdate(){
+    // catStore.on('change', this.handleChange.bind(this))
+    this.setState({
+      cats: catStore.getCats()
+    })
   }
 
   renderCats(){
@@ -34,6 +42,13 @@ class CatIndex extends Component{
   }
 
   render(){
+    let catsToShow
+    if(this.state.cats.length > 0){
+      catsToShow = this.renderCats()
+    } else {
+      catsToShow = <div>waiting...</div>
+    }
+
     return (
       <div>
         <div className="header">
@@ -41,7 +56,7 @@ class CatIndex extends Component{
         </div>
         <div className="row">
           <div className="col-xs-12">
-            {this.renderCats()}
+            {catsToShow}
           </div>
         </div>
       </div>
