@@ -28,7 +28,6 @@ class UserStore extends EventEmitter{
   }
 
   handleAction(action){
-    console.log(action.users);
     switch(action.type){
       // case("FETCH_USERS"):{
       //   this.updateCats(action.users, action.initial)

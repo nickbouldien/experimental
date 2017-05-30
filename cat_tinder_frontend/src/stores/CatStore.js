@@ -30,7 +30,6 @@ class CatStore extends EventEmitter{
 
 
   handleAction(action){
-    console.log(action.cats);
     switch(action.type){
       case("FETCH_CATS"):{
         this.updateCats(action.cats, action.initial)

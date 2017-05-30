@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import Header from '../components/Header'
 import {newUser} from '../actions/CatActions';
 import userStore from '../stores/UserStore';
+import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom'
 
 class UserAdd extends Component{
   constructor(props){
@@ -16,7 +17,8 @@ class UserAdd extends Component{
         email: '',
         password: ''
       },
-      message : ''
+      message : '',
+      redirect: false
     }
   }
   // componentWillMount(){
@@ -34,7 +36,12 @@ class UserAdd extends Component{
 
   handleSubmit(e){
     e.preventDefault();
+    this.setState({
+      redirect: true
+    })
+    console.log(this.state)
     newUser(this.state)
+
       //.catch(
   }
 
@@ -45,9 +52,12 @@ class UserAdd extends Component{
   }
 
   render(){
-
+    if (this.state.redirect){
+      console.log("in redirect")
+      return <Redirect push to="/" />
+    }
     return (
-      <div >
+      <div>
         <div className="header">
           <Header textLocation="Home" linkLocation="/" text="Sign up!"/>
         </div>

@@ -31,7 +31,6 @@ class CatAdd extends Component{
   }
 
   render(){
-
     return (
       <div >
         <div className="header">

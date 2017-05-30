@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import Header from '../components/Header'
 import CatListing from '../components/CatListing';
 import catStore from '../stores/CatStore';
+import {Link} from 'react-router-dom'
 
 class CatIndex extends Component{
   constructor(props){
@@ -46,6 +47,7 @@ class CatIndex extends Component{
       <div>
         <div className="header">
           <Header textLocation="Add a cat!" linkLocation="/cat-add" text="Cats!"/>
+          <Link to="/user-add">Create User</Link>
         </div>
         <div className="row">
           <div className="col-xs-12">
