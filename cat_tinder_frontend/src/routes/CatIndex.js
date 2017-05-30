@@ -25,13 +25,6 @@ class CatIndex extends Component{
     })
   }
 
-  componentWillUpdate(){
-    // catStore.on('change', this.handleChange.bind(this))
-    this.setState({
-      cats: catStore.getCats()
-    })
-  }
-
   renderCats(){
     let list = this.state.cats.map(function(cat, i) {
       return (
@@ -43,7 +36,7 @@ class CatIndex extends Component{
 
   render(){
     let catsToShow
-    if(this.state.cats.length > 0){
+    if(this.state.cats.length > 1){
       catsToShow = this.renderCats()
     } else {
       catsToShow = <div>waiting...</div>

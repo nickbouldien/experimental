@@ -10,7 +10,7 @@ import {fetchCats} from './actions/CatActions';
 class App extends Component {
   constructor(props){
     super(props)
-    fetchCats()
+    fetchCats(true)
   }
   render() {
     return (
@@ -18,7 +18,7 @@ class App extends Component {
         <div className="container">
           <Route exact path="/" component={CatIndex} />
           <Route path='/cat-add' component={CatAdd} />
-          <Route path='/profile' component={CatProfile}  />
+
         </div>
       </Router>
     );
@@ -26,3 +26,6 @@ class App extends Component {
 }
 
 export default App;
+
+
+{/* <Route path='/profile' component={CatProfile}  /> */}
