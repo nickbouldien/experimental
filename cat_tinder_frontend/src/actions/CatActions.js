@@ -27,8 +27,6 @@ export function fetchCats(initial=false){
     })
 }
 
-
-
 export function newCat(catInfo){
   let success;
   const params = {
@@ -51,6 +49,33 @@ export function newCat(catInfo){
       }
       else {
         console.log("failure!", body.cat)
+      }
+    })
+}
+
+
+export function newUser(userInfo){
+  let success;
+  const params = {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(userInfo)
+      }
+  fetch('http://localhost:4000/create-user', params)
+    .then((response)=>{
+      success = response.ok
+      return response.json()
+    })
+    .then((body)=>{
+      if (success){
+        dispatcher.dispatch({
+          type: "NEW_USER",
+          user: body.user
+        })
+        console.log("success!", body.user)
+      }
+      else {
+        console.log("failure!", body.user)
       }
     })
 }
