@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom'
+// import {Link} from 'react-router-dom'
 import Header from '../components/Header'
-import CatListing from '../components/CatListing'
+import CatListing from '../components/CatListing';
+import catStore from '../stores/CatStore';
+import {Link} from 'react-router-dom'
 
 class CatIndex extends Component{
   constructor(props){
@@ -12,26 +14,16 @@ class CatIndex extends Component{
   }
 
   componentWillMount(){
-    let success
-    const params = {
-          method: 'GET',
-          headers: {'Content-Type': 'application/json'}
-        }
-    fetch('http://localhost:4000/cats', params)
-      .then((response)=>{
-        success = response.ok
-        return response.json()
-      })
-      .then((body)=>{
-        if (success){
-          console.log("success!", body)
-          let cats = body.cats
-          this.setState({cats: cats})
-        }
-        else {
-          console.log("failure!", body)
-        }
-      })
+    catStore.on('load', this.handleChange.bind(this))
+    this.setState({
+      cats: catStore.getCats()
+    })
+  }
+
+  handleChange(){
+    this.setState({
+      cats: catStore.getCats()
+    })
   }
 
   renderCats(){
@@ -44,14 +36,22 @@ class CatIndex extends Component{
   }
 
   render(){
+    let catsToShow
+    if(this.state.cats.length > 1){
+      catsToShow = this.renderCats()
+    } else {
+      catsToShow = <div>waiting...</div>
+    }
+
     return (
       <div>
         <div className="header">
           <Header textLocation="Add a cat!" linkLocation="/cat-add" text="Cats!"/>
+          <Link to="/user-add">Create User</Link>
         </div>
         <div className="row">
           <div className="col-xs-12">
-            {this.renderCats()}
+            {catsToShow}
           </div>
         </div>
       </div>

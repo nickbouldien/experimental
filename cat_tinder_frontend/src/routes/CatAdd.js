@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react'
 import Header from '../components/Header'
+import {newCat} from '../actions/CatActions';
 
 class CatAdd extends Component{
   constructor(props){
@@ -20,26 +21,7 @@ class CatAdd extends Component{
 
   handleSubmit(e){
     e.preventDefault();
-    let success;
-
-    const params = {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify(this.state)
-        }
-    fetch('http://localhost:4000/create-cat', params)
-      .then((response)=>{
-        success = response.ok
-        return response.json()
-      })
-      .then((body)=>{
-        if (success){
-          console.log("success!", body)
-        }
-        else {
-          console.log("failure!", body)
-        }
-      })
+    newCat(this.state)
       //.catch(
   }
   handleChange(e){
@@ -49,7 +31,6 @@ class CatAdd extends Component{
   }
 
   render(){
-
     return (
       <div >
         <div className="header">

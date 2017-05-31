@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser')
 var Cat = require('./models').Cat
+var User = require('./models').User
 var cors = require('cors')
 
 var app = express();
@@ -23,7 +24,6 @@ app.get('/cats', function (request, response) {
   // response.json({message: 'API Example App'})
 });
 
-
 //create request.body.cat
 app.post('/create-cat', function(request, response){
   Cat.create(request.body.cat).then(function(cat){
@@ -35,6 +35,18 @@ app.post('/create-cat', function(request, response){
     response.json({message: "fail", error: error})
   })
 })
+
+app.post('/create-user', function(request, response){
+  User.create(request.body.user).then(function(user){
+    response.status(200)
+    response.json({message: "success", user: user})
+  }).catch(function(error){
+    console.log('fail');
+    response.status(400)
+    response.json({message: "fail", error: error})
+  })
+})
+
 
 app.listen(4000, function () {
  console.log('Todo Server listening on port 4000!');
