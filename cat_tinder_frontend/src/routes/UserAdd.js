@@ -30,16 +30,14 @@ class UserAdd extends Component{
 
   componentWillMount(){
     userStore.on('user_created', ()=> {
-      console.log('user was added')
+      this.setState({
+        redirect: true
+      })
     })
   }
 
   handleSubmit(e){
     e.preventDefault();
-    this.setState({
-      redirect: true
-    })
-    console.log(this.state)
     newUser(this.state)
 
       //.catch(
@@ -54,7 +52,7 @@ class UserAdd extends Component{
   render(){
     if (this.state.redirect){
       console.log("in redirect")
-      return <Redirect push to="/" />
+      return <Redirect push to="/user-created" />
     }
     return (
       <div>
