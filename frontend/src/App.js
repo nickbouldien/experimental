@@ -29,6 +29,3 @@ class App extends Component {
 }
 
 export default App;
-
-
-{/* <Route path='/profile' component={CatProfile}  /> */}
