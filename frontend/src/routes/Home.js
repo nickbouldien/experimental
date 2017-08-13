@@ -29,6 +29,7 @@ class Home extends Component{
   handleChange(evt){
     const file = evt.target.files[0];
     console.log('Selected file:', file);
+
     Papa.parse(file, {
     	delimiter: ",",	// auto-detect
     	newline: "",	// auto-detect
@@ -36,7 +37,7 @@ class Home extends Component{
     	header: true,
     	complete:(results, file) => {
       	// console.log("Parsing complete:", results, file);
-        // console.log('this is', this);
+        console.log('this is', results);
         this.createEmails(results, file);
         // console.log('results.data', results.data);
       },
@@ -49,24 +50,28 @@ class Home extends Component{
 
   createEmails(results, file) {
     // get from state, props, context, window...
-    const domain = "http://nickco";
-    const l = "12343-kasd12-1234k-kasd21s-as23ls2";
-    const t = "default_template";
+    const domain = window.location.href; //"http://nickco.org/";
+    // let them select
     const a = "medium1234";
+    const t = "default_template";
+    const l = "12343-kasd12-1234k-kasd21s-as23ls2";
+
+    // console.log('fileinfo', file);
+    const fileName = file.name;
 
     let data = results.data;
-    // console.log('datadata', data);
-     // data.forEach(results.firstname+results.lastname+".com")
+    console.log('in createEmails');
      for(let [index, person] of data.entries()) {
       //  console.log('stuffhere', person);
       //  const emailString = `${person.firstname}@${person.lastname}.com`;
+      const em = person.email;
+      const fn = person.firstname;
+      const ln = person.lastname;
 
-      // need to encode
-       const link = `${person.firstname}@${person.lastname}.comnickkk`;
+      // need to URI encode
+       const link = `${domain}?a=${a}&t=${t}&l=${l}&em=${em}&fn=${fn}&ln=${ln}`;
        data[index].url = link;
      }
-
-    console.log('newdata', data);
 
     const csv = Papa.unparse(data, {
     	quotes: false,
@@ -74,22 +79,34 @@ class Home extends Component{
     	delimiter: ",",
     	header: true,
     	newline: "\r\n",
-      complete: function(data, file) {
-	       console.log("unparsing complete:", results, file);
-      }
+      // complete:(data, csv) => {
+	    //    console.log("unparsing complete:", data, csv);
+      //    this._downloadCSV(csv);
+      // }
     });
-
-    console.log('csv', csv);
+    if (csv) {
+      console.log('csv', csv);
+      this._downloadCSV(csv, fileName);
+    }
   }
 
-  // renderCats(){
-  //   let list = this.state.cats.map(function(cat, i) {
-  //     return (
-  //       <CatListing key={cat.id} catInfo={cat}/>
-  //       )
-  //   })
-  //   return list;
-  // }
+
+  _downloadCSV(csv, fileName) {
+    // console.log('incoming csv: ', csv);
+    var csvData = new Blob([csv], {type: 'text/csv;charset=utf-8;'});
+    var csvURL =  null;
+    if (navigator.msSaveBlob) {
+        csvURL = navigator.msSaveBlob(csvData, `${fileName}+links`);
+    } else {
+        csvURL = window.URL.createObjectURL(csvData);
+    }
+    var tempLink = document.createElement('a');
+    tempLink.href = csvURL;
+    tempLink.setAttribute('download', `${fileName}+links.csv`);
+    tempLink.click();
+  }
+
+
 
   render(){
     // let catsToShow
